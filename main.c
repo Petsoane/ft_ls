@@ -6,7 +6,7 @@
 /*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/07/21 15:53:39 by event            ###   ########.fr       */
+/*   Updated: 2019/07/22 16:20:07 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,35 @@
 
 int main(int ac, char **av)
 {
-    t_file  *head;
     char    *name;
-    DIR     *dir;
-	struct dirent *file;
-	t_file	*tmp;
-
-	head = (t_file *)malloc(sizeof(t_file) * 1);
-	head->name = NULL;
-	head->next = NULL;
-
-    if (ac == 2){
+    
+	if (ac == 2){
         name = strdup(av[1]);
     }
     else
         name = (strdup("."));
-    
-	dir = opendir(name);
-	while ((file = readdir(dir)) != NULL){
-		if (head->name == NULL)
-			head->name = file->d_name;
-		else{
-			tmp = (t_file *)malloc(sizeof(t_file) * 1);
-			tmp->name = file->d_name;
-			tmp->next = head;
-			head = tmp;
-		}
+	ft_ls(name);
+	return (0);
+}
 
+void	ft_ls(char *basePath)
+{
+	t_file *head;
+	DIR *dir;
+	struct dirent *file;
+	//char newPath[10000];
+
+	head = NULL;
+	
+	// open the directry.
+	dir = opendir(basePath);
+	if (!dir )
+		printf("Some error heappend");
+	while ((file = readdir(dir)) != NULL)
+	{
+		add_node(&head, file);
 	}
 	print_contents(head);
-	return (0);
+	puts("");
+	closedir(dir);
 }

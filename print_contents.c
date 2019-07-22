@@ -6,22 +6,23 @@
 /*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/07/21 15:52:51 by event            ###   ########.fr       */
+/*   Updated: 2019/07/22 16:20:19 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_contents(t_file *file)
+void	print_contents(t_file *head)
 {
 	int i;
 
 	i = 1;
-	while (file != NULL){
-		printf("%s\t\t", file->name);
+	while (head != NULL){
+		printf("%s ", head->name);
+		printf("%d\n", head->is_dir);
 		if (i % 4 == 0)
-			printf("\n");
-		file = file->next;
+			puts("");
 		i++;
+		head = head->next;
 	}
 }
