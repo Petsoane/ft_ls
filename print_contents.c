@@ -6,7 +6,7 @@
 /*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/07/22 16:20:19 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/23 08:57:39 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	print_contents(t_file *head)
 
 	i = 1;
 	while (head != NULL){
-		printf("%s ", head->name);
-		printf("%d\n", head->is_dir);
+		printf("%s\t  ", head->name);
 		if (i % 4 == 0)
 			puts("");
 		i++;

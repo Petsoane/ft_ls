@@ -6,7 +6,7 @@
 /*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/07/22 16:20:21 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/23 10:13:30 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 typedef struct s_file
 {
-	int	is_dir;
 	char *name;
 	struct s_file *next;
 }	t_file;

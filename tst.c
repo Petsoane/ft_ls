@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_list.c                                      :+:      :+:    :+:   */
+/*   tst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpetsoan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/23 10:13:21 by lpetsoan         ###   ########.fr       */
+/*   Created: 2019/07/23 08:34:51 by lpetsoan          #+#    #+#             */
+/*   Updated: 2019/07/23 08:57:34 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/* This function adds a node to the list,
- * For now it just adds the node to start of 
- * list,
- */
-void	add_node(t_file **head, struct dirent *file)
+int main(int ac, char **av)
 {
-	t_file *new_node;
+	char *name;
 
-	new_node = (t_file *)malloc(sizeof(t_file) * 1);
-	new_node->name = file->d_name;
-	// check if the file is a directory;
-	if (*head == NULL)
-	{
-		*head = new_node;
-		(*head)->next = NULL;
-		return ;
-	}
-	new_node->next = *head;
-	*head = new_node;
+	if (ac != 2)
+		name =strdup(".");
+	else
+		name = av[1];
+	struct stat info;
+
+	if (lstat(name, &info) == -1)
+		puts("There is an error with the file");
+	else if (S_ISDIR(info.st_mode))
+		puts("This is a directory");
+	return (0);
 }
