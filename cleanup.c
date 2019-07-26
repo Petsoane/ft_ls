@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_list.c                                      :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpetsoan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/23 14:39:34 by lpetsoan         ###   ########.fr       */
+/*   Created: 2019/07/23 10:19:22 by lpetsoan          #+#    #+#             */
+/*   Updated: 2019/07/23 11:06:07 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-/* This function adds a node to the list,
- * For now it just adds the node to start of 
- * list,
+/* This funtion cleans up the contents if the program,
+ * and frees the memory.
  */
-void	add_node(t_file **head, struct dirent *file)
+void	clean_list(t_file *head)
 {
-	t_file *new_node;
+	t_file *prev;
 
-	new_node = (t_file *)malloc(sizeof(t_file) * 1);
-	new_node->name = file->d_name;
-	// insert the node in its correct position.
-	SortedInsert(head, new_node);
+	while (head->next != NULL)
+	{
+		prev = head;
+		head = head->next;
+		free(prev);
+		//free(prev);
+	}
+	free(head);
+	//free(head);
 }

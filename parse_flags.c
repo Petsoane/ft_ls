@@ -1,27 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_list.c                                      :+:      :+:    :+:   */
+/*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpetsoan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/23 14:39:34 by lpetsoan         ###   ########.fr       */
+/*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
+/*   Updated: 2019/07/25 16:01:05 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/* This function adds a node to the list,
- * For now it just adds the node to start of 
- * list,
- */
-void	add_node(t_file **head, struct dirent *file)
+void	parse_flags(int ac, char **av, t_flags * flags)
 {
-	t_file *new_node;
+	int i;
+	int j;
+	char *temp;
 
-	new_node = (t_file *)malloc(sizeof(t_file) * 1);
-	new_node->name = file->d_name;
-	// insert the node in its correct position.
-	SortedInsert(head, new_node);
+	i = 1;
+	j = 0;
+	while (i < ac)
+	{
+		temp = av[1];
+		if (*temp == '-')
+		{
+			temp++;
+			while (*temp)
+			{
+				if (*temp == RECUR)
+					flags->recurse = 1;
+				else
+				{
+					perror("Invalid flag specifi");
+					exit(0);
+				}
+				temp++;
+			}
+		}
+		else
+			break;
+	}
 }

@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_list.c                                      :+:      :+:    :+:   */
+/*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpetsoan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/23 14:39:34 by lpetsoan         ###   ########.fr       */
+/*   Created: 2019/07/25 15:41:11 by lpetsoan          #+#    #+#             */
+/*   Updated: 2019/07/25 16:01:16 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#ifndef MACROS_H
+# define MACROS_H
 
-/* This function adds a node to the list,
- * For now it just adds the node to start of 
- * list,
- */
-void	add_node(t_file **head, struct dirent *file)
-{
-	t_file *new_node;
+# define RECUR "R"
+# define ALL "a"
+# define LONG "l"
+# define REV "r"
 
-	new_node = (t_file *)malloc(sizeof(t_file) * 1);
-	new_node->name = file->d_name;
-	// insert the node in its correct position.
-	SortedInsert(head, new_node);
-}
+#endif

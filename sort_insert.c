@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_list.c                                      :+:      :+:    :+:   */
+/*   sort_insert.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpetsoan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/23 14:39:34 by lpetsoan         ###   ########.fr       */
+/*   Created: 2019/07/23 12:48:24 by lpetsoan          #+#    #+#             */
+/*   Updated: 2019/07/23 12:55:12 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/* This function adds a node to the list,
- * For now it just adds the node to start of 
- * list,
- */
-void	add_node(t_file **head, struct dirent *file)
+void SortedInsert(t_file **head, t_file* newNode)
 {
-	t_file *new_node;
+	t_file dummy;
+	t_file* current = &dummy;
+	dummy.next = *head;
 
-	new_node = (t_file *)malloc(sizeof(t_file) * 1);
-	new_node->name = file->d_name;
-	// insert the node in its correct position.
-	SortedInsert(head, new_node);
+	while (current->next != NULL && strcmp(current->next->name, newNode->name) <= 0)
+		current = current->next;
+
+	newNode->next = current->next;
+	current->next = newNode;
+	*head = dummy.next;
 }
