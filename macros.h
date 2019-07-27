@@ -13,9 +13,9 @@
 #ifndef MACROS_H
 # define MACROS_H
 
-# define RECUR "R"
-# define ALL "a"
-# define LONG "l"
-# define REV "r"
+# define RECUR 'R'
+# define ALL 'a'
+# define LONG 'l'
+# define REV 'r'
 
 #endif

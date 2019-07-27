@@ -13,15 +13,21 @@
 #include "ft_ls.h"
 
 /* This function adds a node to the list,
- * For now it just adds the node to start of 
+ * For now it just adds the node to start of
  * list,
  */
-void	add_node(t_file **head, struct dirent *file)
+void	add_node(t_file **head, struct dirent *file, t_flags *flags)
 {
 	t_file *new_node;
+	struct stat info;
 
 	new_node = (t_file *)malloc(sizeof(t_file) * 1);
 	new_node->name = file->d_name;
+	if (flags->p_long)
+	{
+		lstat(file->d_name, &info);
+		new_node->perms = info.st_mode;
+	}
 	// insert the node in its correct position.
 	SortedInsert(head, new_node);
 }

@@ -24,17 +24,22 @@
 typedef struct s_flags
 {
 	int recurse : 1;
+	int p_all : 1;
+	int p_long : 1;
 }				t_flags;
 
 typedef struct s_file
 {
 	char *name;
+	int perms;
 	struct s_file *next;
 }	t_file;
 
-void	print_contents(t_file *file);
-void	add_node(t_file **head, struct dirent *file);
-void	ft_ls(char *name);
+void	print_contents(t_file *file, t_flags *flags);
+void	add_node(t_file **head, struct dirent *file, t_flags *flags);
+void	ft_ls(char *name, t_flags *flags);
 void	clean_list(t_file *file);
 void	SortedInsert(t_file **head,  t_file *newNode);
+void	parse_flags(int ac, char **av, t_flags *flags);
+
 #endif

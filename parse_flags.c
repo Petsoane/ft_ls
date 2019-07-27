@@ -12,6 +12,10 @@
 
 #include "ft_ls.h"
 
+/*
+ * parse_flags
+ * This function parses the values within the given set of strings
+ */
 void	parse_flags(int ac, char **av, t_flags * flags)
 {
 	int i;
@@ -20,25 +24,45 @@ void	parse_flags(int ac, char **av, t_flags * flags)
 
 	i = 1;
 	j = 0;
-	while (i < ac)
+	while (i < ac)// loop through the whole set of strings
 	{
-		temp = av[1];
-		if (*temp == '-')
+		temp = av[i];
+		if (*temp == '-')// check if the string is a flag.
 		{
+			if (*(temp + 1) == '\0')
+			{
+				perror("No valid flag specified");
+				exit(-1);
+			}
 			temp++;
 			while (*temp)
-			{
+			{// check each flag -in the list of flags.
 				if (*temp == RECUR)
+				{
 					flags->recurse = 1;
+					puts("The recurse flags has been set");
+				}
+				else if (*temp == ALL)
+				{
+					flags->p_all = 1;
+					puts("The all flags has been set");
+				}
+				else if (*temp == LONG)
+				{
+					flags->p_long = 1;
+					puts("The 'long' flag has been set");
+				}
 				else
 				{
+					// if after finding an invalid flag stop the program.
 					perror("Invalid flag specifi");
 					exit(0);
 				}
 				temp++;
 			}
 		}
-		else
+		else // if not a flag, stop checking for a flag.
 			break;
+		i++;
 	}
 }

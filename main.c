@@ -15,20 +15,37 @@
 
 int main(int ac, char **av)
 {
-    char    *name;
-	int		flags;
-	static t_flags flags;
+	char			*name;
+	int				i;
+	static t_flags	flags;
 
-	if (ac == 2){
-        name = strdup(av[]);
-    }
-    else
-        name = (strdup("."));
-	ft_ls(name);
+	if (ac == 1)
+	{
+		parse_flags(ac, av, &flags);
+		ft_ls(".", &flags);
+		return (0);
+	}
+	i = 1;
+	parse_flags(ac, av, &flags);
+	while (i < ac && av[i][0] == '-')
+		i++;
+	if (i - ac == 0)
+	{
+		ft_ls(".", &flags);
+	}
+	else
+	{
+		while (i < ac)
+		{
+			name = strdup(av[i]);
+			ft_ls(name, &flags);
+			i++;
+		}
+	}
 	return (0);
 }
 
-void	ft_ls(char *basePath)
+void	ft_ls(char *basePath, t_flags *flags)
 {
 	t_file *head;
 	DIR *dir;
@@ -42,14 +59,15 @@ void	ft_ls(char *basePath)
 		return ;
 	while ((file = readdir(dir)) != NULL)
 	{
-		add_node(&head, file);
+		add_node(&head, file, flags);
+
 	}
-	print_contents(head);
+	print_contents(head, flags);
 	puts("");
 	//closedir(dir);
 	char path[1000];
 	t_file *tmp = head;
-	while (head != NULL)
+	while (head != NULL && flags->recurse)
 	{
 		// construct path
 		strcpy(path, basePath);
@@ -58,10 +76,12 @@ void	ft_ls(char *basePath)
 		strcat(path, head->name);
 		// if File path is valid and file is a directory, call ls and list contents.
 		if (stat(path, &info) != -1)
-			if (S_ISDIR(info.st_mode) && strcmp(head->name, ".") != 0 && strcmp(head->name, "..") != 0)
+			if (S_ISDIR(info.st_mode) &&
+			strcmp(head->name, ".") != 0 &&
+			strcmp(head->name, "..") != 0)
 			{
 				printf("\n%s:\n", path);
-				ft_ls(path);
+				ft_ls(path, flags);
 			}
 		head = head->next;
 		bzero(path, 1000);
