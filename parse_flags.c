@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/29 15:48:08 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:44:21 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,23 @@ void	parse_flags(int ac, char **av, t_flags * flags)
 				if (*temp == RECUR)
 				{
 					flags->recurse = 1;
-					puts("The recurse flags has been set");
 				}
 				else if (*temp == ALL)
 				{
 					flags->p_all = 1;
-					puts("The all flags has been set");
 				}
 				else if (*temp == LONG)
 				{
 					flags->p_long = 1;
-					puts("The 'long' flag has been set");
+				}
+				else if (*temp == REV)
+				{
+					flags->rev = 1;
 				}
 				else
 				{
 					// if after finding an invalid flag stop the program.
-					perror("Invalid flag specifi");
+					perror("Invalid flag givem:");
 					exit(0);
 				}
 				temp++;

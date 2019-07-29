@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/07/29 16:11:35 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:37:01 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void print_short(t_file *head, t_flags *flags)
 		head = head->next;
 	}
 }
+
 void 	print_long(t_file *head, t_flags *flags)
 {
 	int i;
 
-	puts("Printing the long version");
 	i = 0;
 	while (head != NULL)
 	{
