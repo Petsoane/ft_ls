@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/07/25 16:01:12 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:46:51 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ void	ft_ls(char *basePath, t_flags *flags)
 			strcmp(head->name, ".") != 0 &&
 			strcmp(head->name, "..") != 0)
 			{
+				if (flags->p_all == 0 && head->name[0] == '.')
+				{
+					head = head->next;
+					continue;
+				}
 				printf("\n%s:\n", path);
 				ft_ls(path, flags);
 			}

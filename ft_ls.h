@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/07/25 16:01:14 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:10:50 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include <string.h>
 # include <sys/types.h>
 # include <dirent.h>
+# include <pwd.h>
 # include <stdlib.h>
+# include <grp.h>
+# include <time.h>
 # include "macros.h"
 
 typedef struct s_flags
@@ -31,7 +34,11 @@ typedef struct s_flags
 typedef struct s_file
 {
 	char *name;
+	char *u_name;
+	char *g_name;
+	char *mod_time;
 	int perms;
+	int links;
 	struct s_file *next;
 }	t_file;
 

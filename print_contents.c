@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_contents.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: event <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/07/23 10:17:26 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:11:35 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void 	print_long(t_file *head, t_flags *flags)
 			head = head->next;
 			continue;
 		}
-		printf("%d %s\n", head->perms, head->name);
+		printf("%d %d %s %s %s %s\n", head->perms, head->links, head->u_name,
+		 	head->g_name, head->mod_time, head->name);
 		if (i % 4 == 0)
 			puts("");
 		i++;

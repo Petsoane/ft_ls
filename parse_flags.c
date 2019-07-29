@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpetsoan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/25 16:01:05 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:48:08 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	parse_flags(int ac, char **av, t_flags * flags)
 		{
 			if (*(temp + 1) == '\0')
 			{
-				perror("No valid flag specified");
-				exit(-1);
+				perror("Invalid flag given");
+				exit(1);
 			}
 			temp++;
 			while (*temp)
