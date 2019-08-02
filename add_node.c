@@ -6,14 +6,16 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/29 16:49:52 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/02 15:20:24 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int ascend_sort(char *s1, char *s2);
-int descend_sort(char *s1, char *s2);
+int ascend_sort(t_file *s1, t_file *s2);
+int descend_sort(t_file *s1, t_file *s2);
+int ascend_t_sort(t_file *o, t_file *new);
+int descend_t_sort(t_file *o, t_file *n);
 
 void	add_node(t_file **head, struct dirent *file, t_flags *flags)
 {
@@ -24,6 +26,7 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags)
 
 	new_node = (t_file *)malloc(sizeof(t_file) * 1);
 	new_node->name = file->d_name;
+	new_node->time = info.st_mtime;
 	if (flags->p_long)
 	{
 		lstat(file->d_name, &info);
@@ -38,18 +41,34 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags)
 	}
 	if (flags->rev)
 		SortedInsert(head, new_node, &descend_sort);
+	else if (flags->t_sort && flags->rev)
+		SortedInsert(head, new_node, &descend_t_sort);
+	else if (flags->t_sort)
+		SortedInsert(head, new_node, &ascend_t_sort);
 	else
 		SortedInsert(head, new_node, &ascend_sort);
 }
 
-int ascend_sort(char *old, char *new)
+int		ascend_sort(t_file *old, t_file *new)
 {
-	if (strcmp(old, new) <= 0)
+	if (strcmp(old->name, new->name) <= 0)
 		return (1);
 	return (0);
 }
 
-int descend_sort(char *old, char *new)
+int		descend_sort(t_file *old, t_file *new)
 {
-	return (!ascend_sort(old, new));
+	return (!(ascend_sort(old, new)));
+}
+
+int		ascend_t_sort(t_file *old, t_file *new)
+{
+	if ((old->time - new->time) >= 0)
+		return (1);
+	return (0);
+}
+
+int		descend_t_sort(t_file *old, t_file *new)
+{
+	return (!ascend_t_sort(old,new));
 }

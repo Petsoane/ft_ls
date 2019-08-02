@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/07/29 16:44:21 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/02 14:23:49 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ void	parse_flags(int ac, char **av, t_flags * flags)
 				else if (*temp == REV)
 				{
 					flags->rev = 1;
+				}
+				else if (*temp == T_SORT)
+				{
+					flags->t_sort = 1;
 				}
 				else
 				{
