@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/07/29 16:37:01 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/02 15:39:20 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void 	print_long(t_file *head, t_flags *flags)
 			head = head->next;
 			continue;
 		}
-		printf("%d %d %s %s %s %s\n", head->perms, head->links, head->u_name,
+		printf(FORM, head->perms, head->links, head->u_name,
 		 	head->g_name, head->mod_time, head->name);
 		if (i % 4 == 0)
 			puts("");

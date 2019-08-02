@@ -6,12 +6,14 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/07/29 15:46:51 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/02 15:40:27 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include <errno.h>
+
+void 	creat_path(char *path, char *basePath, char *name);
 
 int main(int ac, char **av)
 {
@@ -47,37 +49,26 @@ int main(int ac, char **av)
 
 void	ft_ls(char *basePath, t_flags *flags)
 {
-	t_file *head;
-	DIR *dir;
-	struct dirent *file;
-	struct stat info;
+	char			path[1000];
+	DIR				*dir;
+	t_file			*head;
+	t_file			*tmp;
+	struct dirent	*file;
+	struct stat		info;
 
 	head = NULL;
-	// open the directry.
-	dir = opendir(basePath);
-	if (!dir)
+	if (!(dir = opendir(basePath)))
 		return ;
 	while ((file = readdir(dir)) != NULL)
-	{
 		add_node(&head, file, flags);
-
-	}
 	print_contents(head, flags);
 	puts("");
-	//closedir(dir);
-	char path[1000];
-	t_file *tmp = head;
+	tmp = head;
 	while (head != NULL && flags->recurse)
 	{
-		// construct path
-		strcpy(path, basePath);
-		if (basePath[strlen(basePath) - 1] != '/')
-			strcat(path, "/");
-		strcat(path, head->name);
-		// if File path is valid and file is a directory, call ls and list contents.
+		creat_path(path, basePath, head->name);
 		if (stat(path, &info) != -1)
-			if (S_ISDIR(info.st_mode) &&
-			strcmp(head->name, ".") != 0 &&
+			if (S_ISDIR(info.st_mode) && strcmp(head->name, ".") != 0 &&
 			strcmp(head->name, "..") != 0)
 			{
 				if (flags->p_all == 0 && head->name[0] == '.')
@@ -93,4 +84,16 @@ void	ft_ls(char *basePath, t_flags *flags)
 	}
 	closedir(dir);
 	clean_list(tmp);
+}
+
+/*
+** : create_path
+** This function will create a new path for ls to follow.
+*/
+void 	creat_path(char *path, char *basePath, char *name)
+{
+	strcpy(path, basePath);
+	if (basePath[strlen(basePath) - 1] != '/')
+		strcat(path, "/");
+	strcat(path, name);
 }

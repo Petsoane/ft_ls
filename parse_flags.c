@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/02 14:23:49 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/02 15:23:07 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,15 @@ void	parse_flags(int ac, char **av, t_flags * flags)
 			while (*temp)
 			{// check each flag -in the list of flags.
 				if (*temp == RECUR)
-				{
 					flags->recurse = 1;
-				}
 				else if (*temp == ALL)
-				{
 					flags->p_all = 1;
-				}
 				else if (*temp == LONG)
-				{
 					flags->p_long = 1;
-				}
 				else if (*temp == REV)
-				{
 					flags->rev = 1;
-				}
 				else if (*temp == T_SORT)
-				{
 					flags->t_sort = 1;
-				}
 				else
 				{
 					// if after finding an invalid flag stop the program.

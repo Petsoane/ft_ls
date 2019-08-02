@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/02 15:20:24 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/02 15:42:45 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags)
 		SortedInsert(head, new_node, &ascend_sort);
 }
 
+/*
+** These functions will be used to control the sortinh
+** of the list respectully.
+*/
 int		ascend_sort(t_file *old, t_file *new)
 {
 	if (strcmp(old->name, new->name) <= 0)
