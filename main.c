@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/02 15:40:27 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/16 15:39:42 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_ls(char *basePath, t_flags *flags)
 	if (!(dir = opendir(basePath)))
 		return ;
 	while ((file = readdir(dir)) != NULL)
-		add_node(&head, file, flags);
+		add_node(&head, file, flags, basePath);
 	print_contents(head, flags);
 	puts("");
 	tmp = head;

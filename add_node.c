@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/02 15:42:45 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/16 15:39:25 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,29 @@ int ascend_sort(t_file *s1, t_file *s2);
 int descend_sort(t_file *s1, t_file *s2);
 int ascend_t_sort(t_file *o, t_file *new);
 int descend_t_sort(t_file *o, t_file *n);
+void 	create_path(char *path, char *basePath, char *name)
+{
+	strcpy(path, basePath);
+	if (basePath[strlen(basePath) - 1] != '/')
+		strcat(path, "/");
+	strcat(path, name);
+}
 
-void	add_node(t_file **head, struct dirent *file, t_flags *flags)
+void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath)
 {
 	t_file *new_node;
+	char *path;
 	struct stat info;
 	struct passwd *u_info;
 	struct group *g_info;
 
+	path = NULL;
 	new_node = (t_file *)malloc(sizeof(t_file) * 1);
 	new_node->name = file->d_name;
 	new_node->time = info.st_mtime;
 	if (flags->p_long)
 	{
+		create_path(path, basePath, file->d_name);
 		lstat(file->d_name, &info);
 		g_info = getgrgid(info.st_gid);
 		u_info = getpwuid(info.st_uid);

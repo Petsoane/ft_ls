@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/02 14:47:42 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/16 15:37:34 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_file
 }	t_file;
 
 void	print_contents(t_file *file, t_flags *flags);
-void	add_node(t_file **head, struct dirent *file, t_flags *flags);
+void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath);
 void	ft_ls(char *name, t_flags *flags);
 void	clean_list(t_file *file);
 void	SortedInsert(t_file **head,  t_file *newNode, int (*f)(t_file *s1, t_file *s2));
