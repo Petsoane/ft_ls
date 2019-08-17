@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/16 15:39:25 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/17 14:37:38 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,18 @@ void 	create_path(char *path, char *basePath, char *name)
 void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath)
 {
 	t_file *new_node;
-	char *path;
+	char path[100000];
 	struct stat info;
 	struct passwd *u_info;
 	struct group *g_info;
 
-	path = NULL;
 	new_node = (t_file *)malloc(sizeof(t_file) * 1);
 	new_node->name = file->d_name;
 	new_node->time = info.st_mtime;
 	if (flags->p_long)
 	{
 		create_path(path, basePath, file->d_name);
-		lstat(file->d_name, &info);
+		lstat(path, &info);
 		g_info = getgrgid(info.st_gid);
 		u_info = getpwuid(info.st_uid);
 		new_node->perms = info.st_mode;
@@ -57,6 +56,8 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath
 		SortedInsert(head, new_node, &ascend_t_sort);
 	else
 		SortedInsert(head, new_node, &ascend_sort);
+	printf(FORM, new_node->perms, new_node->links, new_node->u_name,
+		 	new_node->g_name, new_node->mod_time, new_node->name);
 }
 
 /*

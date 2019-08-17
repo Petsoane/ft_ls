@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/16 15:39:42 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/17 14:36:28 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,18 @@ void	ft_ls(char *basePath, t_flags *flags)
 	if (!(dir = opendir(basePath)))
 		return ;
 	while ((file = readdir(dir)) != NULL)
+		// getting the information.
 		add_node(&head, file, flags, basePath);
-	print_contents(head, flags);
+	// printing the info
+	printf(FORM, head->perms, head->links, head->u_name,
+		head->g_name, head->mod_time, head->name);
 	puts("");
+	print_contents(head, flags);
 	tmp = head;
 	while (head != NULL && flags->recurse)
 	{
 		creat_path(path, basePath, head->name);
-		if (stat(path, &info) != -1)
+		if (lstat(path, &info) != -1)
 			if (S_ISDIR(info.st_mode) && strcmp(head->name, ".") != 0 &&
 			strcmp(head->name, "..") != 0)
 			{

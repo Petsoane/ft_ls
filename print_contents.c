@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/08/02 15:39:20 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/17 14:35:22 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void print_short(t_file *head, t_flags *flags)
 			head = head->next;
 			continue;
 		}
-		printf("%s\t     ", head->name);
+		printf("%s\n", head->name);
 		if (i % 4 == 0)
 			puts("");
 		i++;
