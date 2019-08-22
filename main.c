@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/17 14:36:28 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/22 09:17:46 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	ft_ls(char *basePath, t_flags *flags)
 		// getting the information.
 		add_node(&head, file, flags, basePath);
 	// printing the info
-	printf(FORM, head->perms, head->links, head->u_name,
-		head->g_name, head->mod_time, head->name);
+	// printf(FORM, head->perms, head->links, head->u_name,
+	// 	head->g_name, head->mod_time, head->name);
 	puts("");
 	print_contents(head, flags);
 	tmp = head;

@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/17 14:37:38 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/22 09:17:13 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath
 		u_info = getpwuid(info.st_uid);
 		new_node->perms = info.st_mode;
 		new_node->links = info.st_nlink;
-		new_node->u_name = u_info->pw_name;
-		new_node->g_name = g_info->gr_name;
+		new_node->u_name = u_info == NULL ? "error" : u_info->pw_name;
+		new_node->g_name = g_info == NULL ? "error" : g_info->gr_name;
 		new_node->mod_time = ctime(&info.st_mtime);
-		new_node->mod_time[strlen(new_node->mod_time) - 2] = '\0';
+		new_node->mod_time[strlen(new_node->mod_time) - 1] = '\0';
 	}
 	if (flags->rev)
 		SortedInsert(head, new_node, &descend_sort);
@@ -56,8 +56,6 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath
 		SortedInsert(head, new_node, &ascend_t_sort);
 	else
 		SortedInsert(head, new_node, &ascend_sort);
-	printf(FORM, new_node->perms, new_node->links, new_node->u_name,
-		 	new_node->g_name, new_node->mod_time, new_node->name);
 }
 
 /*
