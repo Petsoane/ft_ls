@@ -6,14 +6,14 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/22 17:35:39 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/22 18:03:18 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include <errno.h>
 
-void 	creat_path(char *path, char *basePath, char *name);
+void 	create_path(char *path, char *basePath, char *name);
 
 int main(int ac, char **av)
 {
@@ -65,7 +65,7 @@ void	ft_ls(char *basePath, t_flags *flags)
 	tmp = head;
 	while (head != NULL && flags->recurse)
 	{
-		creat_path(path, basePath, head->name);
+		create_path(path, basePath, head->name);
 		if (lstat(path, &info) != -1)
 			if (S_ISDIR(info.st_mode) && strcmp(head->name, ".") != 0 &&
 			strcmp(head->name, "..") != 0)
@@ -89,7 +89,7 @@ void	ft_ls(char *basePath, t_flags *flags)
 ** : create_path
 ** This function will create a new path for ls to follow.
 */
-void 	creat_path(char *path, char *basePath, char *name)
+void 	create_path(char *path, char *basePath, char *name)
 {
 	strcpy(path, basePath);
 	if (basePath[strlen(basePath) - 1] != '/')
