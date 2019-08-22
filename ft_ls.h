@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/16 15:37:34 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:23:45 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ typedef struct s_flags
 
 typedef struct s_file
 {
-	char *name;
-	char *u_name;
-	char *g_name;
-	char *mod_time;
+	char name[255];
+	char u_name[255];
+	char g_name[255];
+	char mod_time[255];
 	time_t time;
 	int perms;
 	int links;

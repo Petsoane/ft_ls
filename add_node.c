@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/22 15:11:57 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:25:07 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath
 	struct group *g_info;
 
 	new_node = (t_file *)malloc(sizeof(t_file) * 1);
-	new_node->name = strdup(file->d_name);
+	strcpy(new_node->name, file->d_name);
 	new_node->time = info.st_mtime;
 	if (flags->p_long)
 	{
@@ -43,9 +43,9 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath
 		u_info = getpwuid(info.st_uid);
 		new_node->perms = info.st_mode;
 		new_node->links = info.st_nlink;
-		new_node->u_name = strdup(u_info == NULL ? "error" : u_info->pw_name);
-		new_node->g_name = strdup(g_info == NULL ? "error" : g_info->gr_name);
-		new_node->mod_time = ctime(&info.st_mtime);
+		strcpy(new_node->u_name, (u_info == NULL ? "error" : u_info->pw_name));
+		strcpy(new_node->g_name, strdup(g_info == NULL ? "error" : g_info->gr_name));
+		strcpy(new_node->mod_time, ctime(&info.st_mtime));
 		new_node->mod_time[strlen(new_node->mod_time) - 1] = '\0';
 	}
 	if (flags->rev)
