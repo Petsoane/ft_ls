@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/22 17:23:45 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/22 17:41:44 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_file
 	char g_name[255];
 	char mod_time[255];
 	time_t time;
-	int perms;
+	mode_t perms;
 	int links;
 	struct s_file *next;
 }	t_file;
@@ -51,5 +51,6 @@ void	ft_ls(char *name, t_flags *flags);
 void	clean_list(t_file *file);
 void	SortedInsert(t_file **head,  t_file *newNode, int (*f)(t_file *s1, t_file *s2));
 void	parse_flags(int ac, char **av, t_flags *flags);
+void 	print_perms(mode_t perms);
 
 #endif
