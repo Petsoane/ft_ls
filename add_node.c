@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/22 17:25:07 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/24 13:35:37 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ int ascend_sort(t_file *s1, t_file *s2);
 int descend_sort(t_file *s1, t_file *s2);
 int ascend_t_sort(t_file *o, t_file *new);
 int descend_t_sort(t_file *o, t_file *n);
-void 	create_path(char *path, char *basePath, char *name)
-{
-	strcpy(path, basePath);
-	if (basePath[strlen(basePath) - 1] != '/')
-		strcat(path, "/");
-	strcat(path, name);
-}
 
 void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath)
 {
@@ -76,7 +69,7 @@ int		descend_sort(t_file *old, t_file *new)
 
 int		ascend_t_sort(t_file *old, t_file *new)
 {
-	if ((old->time - new->time) >= 0)
+	if ((new->time - old->time) > 0)
 		return (1);
 	return (0);
 }

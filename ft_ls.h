@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/22 17:41:44 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/24 13:25:41 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ void	clean_list(t_file *file);
 void	SortedInsert(t_file **head,  t_file *newNode, int (*f)(t_file *s1, t_file *s2));
 void	parse_flags(int ac, char **av, t_flags *flags);
 void 	print_perms(mode_t perms);
+void 	create_path(char *path, char *basePath, char *name);
+
 
 #endif
