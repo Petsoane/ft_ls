@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/24 13:25:41 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/24 16:37:54 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <grp.h>
 # include <time.h>
 # include "macros.h"
+# include "libft/libft.h"
 
 typedef struct s_flags
 {
@@ -35,12 +36,16 @@ typedef struct s_flags
 
 typedef struct s_file
 {
+	int is_dir;
+	time_t time;
+
 	char name[255];
 	char u_name[255];
 	char g_name[255];
 	char mod_time[255];
-	time_t time;
+	char path[255];
 	mode_t perms;
+	long n_sec;
 	int links;
 	struct s_file *next;
 }	t_file;
@@ -51,7 +56,7 @@ void	ft_ls(char *name, t_flags *flags);
 void	clean_list(t_file *file);
 void	SortedInsert(t_file **head,  t_file *newNode, int (*f)(t_file *s1, t_file *s2));
 void	parse_flags(int ac, char **av, t_flags *flags);
-void 	print_perms(mode_t perms);
+void 	print_perms(mode_t perms, int is_dir);
 void 	create_path(char *path, char *basePath, char *name);
 
 
