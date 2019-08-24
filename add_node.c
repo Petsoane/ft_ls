@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/24 16:38:32 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/24 16:59:06 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	add_node(t_file **head, struct dirent *file, t_flags *flags, char *basePath
 */
 int		ascend_sort(t_file *old, t_file *new)
 {
-	if (strcmp(old->name, new->name) <= 0)
+	if (ft_strcmp(old->name, new->name) <= 0)
 		return (1);
 	return (0);
 }
