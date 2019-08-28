@@ -6,7 +6,7 @@
 #    By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/20 08:07:20 by lpetsoan          #+#    #+#              #
-#    Updated: 2019/08/28 12:19:05 by lpetsoan         ###   ########.fr        #
+#    Updated: 2019/08/28 16:45:26 by lpetsoan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = cleanup.c\
 	  print_perms.c\
 	  sort_insert.c\
 	  print_form.c\
+	  sort_t_checks.c\
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/26 12:42:30 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/28 15:35:29 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void	get_long_info(t_file *new_node, struct stat info)
 	u_info = getpwuid(info.st_uid);
 	new_node->perms = info.st_mode;
 	new_node->links = info.st_nlink;
+	new_node->size = info.st_size;
 	ft_strcpy(new_node->u_name, (u_info == NULL ? "error" : u_info->pw_name));
 	ft_strcpy(new_node->g_name,
 		ft_strdup(g_info == NULL ? "error" : g_info->gr_name));
-	ft_strcpy(new_node->mod_time, ctime(&info.st_mtime));
+	ft_strcpy(new_node->mod_time, (ctime(&info.st_mtime)) + 4);
 	new_node->mod_time[strlen(new_node->mod_time) - 1] = '\0';
 }

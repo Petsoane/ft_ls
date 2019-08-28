@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/26 12:56:19 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/28 16:48:14 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		add_node(t_file **h, struct dirent *file, t_flags *flags,
 	t_file		*new_node;
 	struct stat	info;
 
+	/* Create a new node with basic information*/
 	new_node = (t_file *)malloc(sizeof(t_file) * 1);
 	ft_strcpy(new_node->name, file->d_name);
 	new_node->time = info.st_mtimespec.tv_sec;
@@ -25,6 +26,7 @@ void		add_node(t_file **h, struct dirent *file, t_flags *flags,
 	lstat(new_node->path, &info);
 	if (S_ISDIR(info.st_mode))
 		new_node->is_dir = 1;
+	// check if the long flag was set.
 	if (flags->p_long)
 	{
 		get_long_info(new_node, info);
@@ -58,10 +60,25 @@ int			descend_sort(t_file *old, t_file *new)
 
 int			ascend_t_sort(t_file *old, t_file *new)
 {
-	if ((new->time < old->time))
-		return (1);
-	else if (new->n_sec < old->n_sec)
-		return (1);
+	int ret;
+
+	if ((ret = check_month(old, new)) != -1)
+	{
+		return (ret);
+	}
+	else if ((ret = check_date(old, new))  != -1)
+	{
+		return (ret);
+	}
+	else if ((ret = check_hours(old, new)) != -1)
+	{
+		return (ret);
+	}
+	else if ((ret = check_min(old, new)) != -1)
+	{
+		return (ret);
+	}
+
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:41:11 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/28 12:39:18 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/28 14:57:21 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define LONG 'l'
 # define REV 'r'
 # define T_SORT 't'
-# define FORM_COLOR "%d %s %s %s \033[1;35m%s\n\033[0m"
-# define FORM "%d %s %s %s %s\n"
+# define FORM_COLOR "%d %s %s %d \t%s \033[1;35m%s\033[0m\n"
+# define FORM "%d %s %s %d \t%s %s\n"
 # define SHORT_COLOR "\033[1;35m%s\033[0m\t\t"
 # define SHORT "%s\t\t"
 # define NOT_DOT strcmp(head->name, ".") != 0

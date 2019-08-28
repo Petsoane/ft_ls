@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/28 12:22:54 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/28 16:48:17 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ typedef struct		s_file
 	mode_t			perms;
 	long			n_sec;
 	int				links;
+	int				size;
 	struct s_file	*next;
+
 }					t_file;
 
 int					ascend_sort(t_file *s1, t_file *s2);
@@ -68,5 +70,9 @@ void				get_long_info(t_file *new_node, struct stat info);
 void				print_long(t_file *head, t_flags *flags);
 void				print_short(t_file *head, t_flags *flags);
 int					print_form(const char *form, ...);
+int					check_month(t_file *old, t_file *new);
+int					check_date(t_file *old, t_file *new);
+int					check_hours(t_file *old, t_file *new);
+int					check_min(t_file *old, t_file *new);
 
 #endif
