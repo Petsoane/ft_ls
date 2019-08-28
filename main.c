@@ -6,17 +6,13 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/24 16:59:05 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/28 12:42:13 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-
-//void 	create_path(char *path, char *basePath, char *name);
-void 	free_node(t_file **head);
-
-int main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	char			*name;
 	int				i;
@@ -33,44 +29,25 @@ int main(int ac, char **av)
 	while (i < ac && av[i][0] == '-')
 		i++;
 	if (i - ac == 0)
-	{
 		ft_ls(".", &flags);
-	}
 	else
-	{
 		while (i < ac)
 		{
 			name = ft_strdup(av[i]);
 			ft_ls(name, &flags);
 			i++;
 		}
-	}
 	return (0);
 }
 
-void	ft_ls(char *basePath, t_flags *flags)
+void		walk_path(t_file *head, char *basepath, t_flags *flags)
 {
-	//puts(basePath);
-	char			path[1000];
-	DIR				*dir;
-	t_file			*head;
-	t_file			*tmp;
-	struct dirent	*file;
 	struct stat		info;
+	char			path[10000];
 
-	head = NULL;
-	if (!(dir = opendir(basePath)))
-	{
-		perror("Openning file:");
-		return;
-	}
-	while ((file = readdir(dir)) != NULL)
-		add_node(&head, file, flags, basePath);
-	print_contents(head, flags);
-	tmp = head;
 	while (head != NULL && flags->recurse)
 	{
-		create_path(path, basePath, head->name);
+		create_path(path, basepath, head->name);
 		if (stat(head->path, &info) != -1)
 			if (S_ISDIR(info.st_mode) && NOT_DOT && NOT_DOT_DOT)
 			{
@@ -79,11 +56,30 @@ void	ft_ls(char *basePath, t_flags *flags)
 					head = head->next;
 					continue;
 				}
-				printf("\n%s:\n", path);
+				print_form("\n\n\033[1;34m%s:\033[0m\n", path);
 				ft_ls(head->path, flags);
 			}
 		head = head->next;
+		bzero(path, 10000);
 	}
+}
+
+void		ft_ls(char *basepath, t_flags *flags)
+{
+	DIR				*dir;
+	t_file			*head;
+	struct dirent	*file;
+
+	head = NULL;
+	if (!(dir = opendir(basepath)))
+	{
+		perror("Openning file:");
+		return ;
+	}
+	while ((file = readdir(dir)) != NULL)
+		add_node(&head, file, flags, basepath);
+	print_contents(head, flags);
+	walk_path(head, basepath, flags);
 	closedir(dir);
-	clean_list(tmp);
+	clean_list(head);
 }
