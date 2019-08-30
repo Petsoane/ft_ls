@@ -6,12 +6,16 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/08/30 10:05:38 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:17:34 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+/*
+**	This function is used to display the files on the list.
+**	It has two sub-functions that print the long format or the short form.
+*/
 void	print_contents(t_file *head, t_flags *flags)
 {
 	int i;

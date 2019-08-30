@@ -6,11 +6,16 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/28 16:47:54 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:19:40 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*
+**	These funcitions are used as sub-functions for sorting with the t flag.
+**	They are used to sort the contents by month, date, time.
+*/
 
 int			check_month(t_file *old, t_file *new)
 {

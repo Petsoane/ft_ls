@@ -6,19 +6,23 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/30 11:08:48 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:15:44 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+/*
+**	This function is used to add information of each entry in the list.
+**	It also handles the sorting of the nodes depending on the flags that are
+**	set.
+*/
 void		add_node(t_file **h, struct dirent *file, t_flags *flags,
 			char *basepath)
 {
 	t_file		*new_node;
 	struct stat	info;
 
-	/* Create a new node with basic information*/
 	new_node = (t_file *)malloc(sizeof(t_file) * 1);
 	ft_strcpy(new_node->name, file->d_name);
 	new_node->time = info.st_mtimespec.tv_sec;
@@ -26,7 +30,6 @@ void		add_node(t_file **h, struct dirent *file, t_flags *flags,
 	lstat(new_node->path, &info);
 	if (S_ISDIR(info.st_mode))
 		new_node->is_dir = 1;
-	// Get the long flags information.
 	if (flags->p_long)
 	{
 		get_long_info(new_node, info);
@@ -42,8 +45,7 @@ void		add_node(t_file **h, struct dirent *file, t_flags *flags,
 }
 
 /*
-** These functions will be used to control the sortinh
-** of the list respectully.
+**	These functions are to by sort_insert to sort list in a given order.
 */
 
 int			ascend_sort(t_file *old, t_file *new)

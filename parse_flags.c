@@ -6,13 +6,13 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/30 10:08:13 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:21:59 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	add_flag(char flag, t_flags *flags)
+static void	add_flag(char flag, t_flags *flags)
 {
 	if (flag == RECUR)
 		flags->recurse = 1;
@@ -31,6 +31,9 @@ void	add_flag(char flag, t_flags *flags)
 	}
 }
 
+/*
+**	This function is used to parse the flags in the given av array o f strings.
+*/
 void	parse_flags(int ac, char **av, t_flags *flags)
 {
 	int		i;
