@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/30 11:04:57 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:42:23 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void 	pre_check(int i, t_flags *flags, int ac, char **av)
 	tmp = i;
 	while (tmp < ac)
 	{
-		if (lstat(av[tmp], &info) != -1 && !S_ISDIR(info.st_mode))
+		if ((lstat(av[tmp], &info) != -1) && !S_ISDIR(info.st_mode))
 		{
 			if (flags->p_long)
 			{
@@ -58,8 +58,8 @@ void 	pre_check(int i, t_flags *flags, int ac, char **av)
 			else
 				print_form(SHORT, av[tmp]);
 		}
-		else
-			perror("Error: ");
+		else if (!S_ISDIR(info.st_mode))
+			perror("Error in pre_check: ");
 		tmp++;
 	}
 	walk_through_list(i, ac, av, flags);
