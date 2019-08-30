@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/30 11:32:49 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:44:01 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		pre_check(int i, t_flags *flags, int ac, char **av)
 			else
 				print_form(SHORT, av[tmp]);
 		}
-		else
+		else if (!S_ISDIR(info.st_mode))
 			perror("Error: ");
 		tmp++;
 	}
