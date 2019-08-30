@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/30 11:15:44 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:24:25 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 **	It also handles the sorting of the nodes depending on the flags that are
 **	set.
 */
+
 void		add_node(t_file **h, struct dirent *file, t_flags *flags,
 			char *basepath)
 {
@@ -68,7 +69,7 @@ int			ascend_t_sort(t_file *old, t_file *new)
 	{
 		return (ret);
 	}
-	else if ((ret = check_date(old, new))  != -1)
+	else if ((ret = check_date(old, new)) != -1)
 	{
 		return (ret);
 	}
@@ -80,7 +81,6 @@ int			ascend_t_sort(t_file *old, t_file *new)
 	{
 		return (ret);
 	}
-
 	return (0);
 }
 

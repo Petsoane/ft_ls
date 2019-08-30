@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/30 11:21:59 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:29:08 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	add_flag(char flag, t_flags *flags)
 /*
 **	This function is used to parse the flags in the given av array o f strings.
 */
-void	parse_flags(int ac, char **av, t_flags *flags)
+
+void		parse_flags(int ac, char **av, t_flags *flags)
 {
 	int		i;
 	char	*temp;
@@ -46,9 +47,7 @@ void	parse_flags(int ac, char **av, t_flags *flags)
 		if (*temp == '-')
 		{
 			if (*(temp + 1) == '-')
-			{
 				return ;
-			}
 			if (*(temp + 1) == '\0')
 			{
 				perror("Invalid flag given");
@@ -56,10 +55,7 @@ void	parse_flags(int ac, char **av, t_flags *flags)
 			}
 			temp++;
 			while (*temp)
-			{
-				add_flag(*temp, flags);
-				temp++;
-			}
+				add_flag(*temp++, flags);
 		}
 		else
 			break ;

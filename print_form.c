@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/08/28 14:21:04 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:25:44 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int		print_form(const char *form, ...)
 {
-	// create a va_list.
-	va_list list;
+	va_list		list;
 
-	// start the list.
 	va_start(list, form);
 	while (*form)
 	{

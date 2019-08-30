@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/30 11:04:57 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:32:49 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 ** given in the list.
 */
 
-void 	walk_through_list(int i, int ac, char **av, t_flags *flags)
+void		walk_through_list(int i, int ac, char **av, t_flags *flags)
 {
-	struct stat info;
-	char *name;
+	struct stat	info;
+	char		*name;
 
 	while (i < ac)
 	{
@@ -37,11 +37,11 @@ void 	walk_through_list(int i, int ac, char **av, t_flags *flags)
 **	This function is used to print information for all the files in the list.
 */
 
-void 	pre_check(int i, t_flags *flags, int ac, char **av)
+void		pre_check(int i, t_flags *flags, int ac, char **av)
 {
-	int tmp;
-	struct stat info;
-	t_file new_node;
+	int				tmp;
+	struct stat		info;
+	t_file			new_node;
 
 	tmp = i;
 	while (tmp < ac)
