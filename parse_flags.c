@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:39:41 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/26 13:15:33 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 10:08:13 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ void	parse_flags(int ac, char **av, t_flags *flags)
 		temp = av[i];
 		if (*temp == '-')
 		{
+			if (*(temp + 1) == '-')
+			{
+				return ;
+			}
 			if (*(temp + 1) == '\0')
 			{
 				perror("Invalid flag given");

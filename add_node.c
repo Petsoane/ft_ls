@@ -6,7 +6,7 @@
 /*   By: lpetsoan <lpetsoan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 14:46:34 by lpetsoan          #+#    #+#             */
-/*   Updated: 2019/08/28 16:48:14 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:08:48 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		add_node(t_file **h, struct dirent *file, t_flags *flags,
 	lstat(new_node->path, &info);
 	if (S_ISDIR(info.st_mode))
 		new_node->is_dir = 1;
-	// check if the long flag was set.
+	// Get the long flags information.
 	if (flags->p_long)
 	{
 		get_long_info(new_node, info);

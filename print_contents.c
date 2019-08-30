@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:37:35 by event             #+#    #+#             */
-/*   Updated: 2019/08/28 14:52:20 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 10:05:38 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ void	print_short(t_file *head, t_flags *flags)
 			continue;
 		}
 		print_form(IS_DIR_SHORT, head->name);
-		if (i % 5 == 0)
-		{
-			print_form("\n");
-			i = 1;
-		}
 		i++;
 		head = head->next;
 	}

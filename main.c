@@ -6,15 +6,73 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:20:28 by event             #+#    #+#             */
-/*   Updated: 2019/08/28 12:42:13 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:04:57 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+/*
+** This functino is used as way to walk through all the directories
+** given in the list.
+*/
+
+void 	walk_through_list(int i, int ac, char **av, t_flags *flags)
+{
+	struct stat info;
+	char *name;
+
+	while (i < ac)
+	{
+		name = ft_strdup(av[i]);
+		if (lstat(name, &info) != -1)
+			if (S_ISDIR(info.st_mode))
+				ft_ls(name, flags);
+		free(name);
+		i++;
+	}
+}
+
+/*
+**	This function is used to print information for all the files in the list.
+*/
+
+void 	pre_check(int i, t_flags *flags, int ac, char **av)
+{
+	int tmp;
+	struct stat info;
+	t_file new_node;
+
+	tmp = i;
+	while (tmp < ac)
+	{
+		if (lstat(av[tmp], &info) != -1 && !S_ISDIR(info.st_mode))
+		{
+			if (flags->p_long)
+			{
+				get_long_info(&new_node, info);
+				print_perms(new_node.perms, 0);
+				print_form(FORM, new_node.links, new_node.u_name,
+				new_node.g_name, new_node.size, new_node.mod_time, av[tmp]);
+			}
+			else
+				print_form(SHORT, av[tmp]);
+		}
+		else
+			perror("Error: ");
+		tmp++;
+	}
+	walk_through_list(i, ac, av, flags);
+}
+
+/*
+**	This is the main hub where the flags get parsed and if errors the program
+**	returns an error and stops running.
+**	This is where the list function gets started out.
+*/
+
 int			main(int ac, char **av)
 {
-	char			*name;
 	int				i;
 	static t_flags	flags;
 
@@ -31,14 +89,14 @@ int			main(int ac, char **av)
 	if (i - ac == 0)
 		ft_ls(".", &flags);
 	else
-		while (i < ac)
-		{
-			name = ft_strdup(av[i]);
-			ft_ls(name, &flags);
-			i++;
-		}
+		pre_check(i, &flags, ac, av);
 	return (0);
 }
+
+/*
+**	This is function is where the -R flag is handled and the file structure
+**	is 'walked'.
+*/
 
 void		walk_path(t_file *head, char *basepath, t_flags *flags)
 {
@@ -63,6 +121,11 @@ void		walk_path(t_file *head, char *basepath, t_flags *flags)
 		bzero(path, 10000);
 	}
 }
+
+/*
+**	This is the main part of the listing, it's where the directory contents are
+**	are stored and printed on the screen.
+*/
 
 void		ft_ls(char *basepath, t_flags *flags)
 {
