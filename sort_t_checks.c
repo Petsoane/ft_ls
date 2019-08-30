@@ -6,7 +6,7 @@
 /*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:31:02 by event             #+#    #+#             */
-/*   Updated: 2019/08/30 11:35:22 by lpetsoan         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:55:19 by lpetsoan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,48 +19,39 @@
 
 int			check_month(t_file *old, t_file *new)
 {
-	int start;
-	int end;
-	char *tmp;
-	static char nstr[255];
-	static char ostr[255];
-	static char *month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+	int			end;
+	int			k;
+	static char	nstr[255];
+	static char	ostr[255];
+	static char	*month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
 								"Aug", "Sep", "Oct", "Nov", "Dec"};
-	start = 0;
+
 	end = 0;
-	tmp = old->mod_time;
-	while (tmp[end] && tmp[end] != ' ')
+	while (old->mod_time[end] && old->mod_time[end] != ' ')
 		end++;
-	char *n_tmp = new->mod_time;
-	ft_strncpy(ostr, tmp, end);
-	ft_strncpy(nstr, n_tmp, end);
-	int i = 0;
-	int k = 0;
-	while (i < 12 && strcmp(ostr, month[i] ) != 0)
-		i++;
-	while (k < 12 && strcmp(nstr, month[k] ) != 0)
+	ft_strncpy(ostr, old->mod_time, end);
+	ft_strncpy(nstr, new->mod_time, end);
+	end = 0;
+	k = 0;
+	while (end < 12 && strcmp(ostr, month[end]) != 0)
+		end++;
+	while (k < 12 && strcmp(nstr, month[k]) != 0)
 		k++;
-	if (i > k)
+	if (end > k)
 		return (1);
-	// if (i == k)
-	// 	return (-1);
-	return (i == k ? -1 : 0);
+	return (end == k ? -1 : 0);
 }
 
 int			check_date(t_file *old, t_file *new)
 {
-	int start;
-	int end;
-	int count;
-	char num[255];
-	char n2[255];
-	char *tmp;
-	// char *n_tmp;
+	int		end;
+	int		count;
+	char	num[255];
+	char	n2[255];
+	char	*tmp;
 
-	start = 0;
 	end = 0;
 	count = 0;
-
 	tmp = old->mod_time;
 	ft_strncpy(num, (tmp + 4), 2);
 	tmp = new->mod_time;
@@ -78,7 +69,6 @@ int			check_date(t_file *old, t_file *new)
 
 int			check_hours(t_file *old, t_file *new)
 {
-
 	char num[255];
 	char n2[255];
 
@@ -97,7 +87,6 @@ int			check_hours(t_file *old, t_file *new)
 
 int			check_min(t_file *old, t_file *new)
 {
-
 	char num[255];
 	char n2[255];
 
